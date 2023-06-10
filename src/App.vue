@@ -1,20 +1,26 @@
 <template>
-  <h1>{{ msg }}</h1>
-  <input v-model="a">
-  <button @click="sub">sss</button>
+  <el-input v-model="msg"></el-input><br>
+  <el-button @click="pop">测试</el-button>
 </template>
 
 <script>
+
+import {ElMessage} from "element-plus";
+
 export default{
+
   data(){
     return{
-      msg:'Hello World!',
-      a:""
+      msg:'ss'
     }
   },
   methods:{
-    sub(){
-      console.log(this.a);
+    pop(){
+
+      ElMessage({
+        message: '你好,'+this.msg,
+        type: 'info'
+      })
     }
   }
 }
