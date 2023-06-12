@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "vue": "^3.3.2",
-    "vue-baidu-map": "^0.21.22"
+    "vue-baidu-map": "^0.21.22",
+    "vue3-baidu-map-gl": "^2.1.3"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.2.3",

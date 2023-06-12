@@ -1,18 +1,19 @@
 <template>
   <el-input v-model="msg"></el-input><br>
   <el-button @click="pop">测试</el-button>
-  <baidu-map :center="center" :zoom="zoom" @ready="handler"></baidu-map>
+  <b-map height="100vh" :enable-scroll-wheel-zoom="true">
+    <b-zoom></b-zoom>
+    <b-scale></b-scale>
+    <b-location anchor="BMAP_ANCHOR_TOP_RIGHT"></b-location>
+  </b-map>
 </template>
 
 <style>
-.bm-view {
-  width: 100%;
-  height: 300px;
-}
 </style>
 <script>
 
-import {ElMessage} from "element-plus";
+import {ElMessage} from "element-plus"
+
 
 export default{
 
@@ -30,12 +31,6 @@ export default{
         message: '你好,'+this.msg,
         type: 'info'
       })
-    },
-    handler ({BMap, map}) {
-      console.log(BMap, map)
-      this.center.lng = 116.404
-      this.center.lat = 39.915
-      this.zoom = 15
     }
   }
 }
