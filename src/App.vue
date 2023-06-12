@@ -1,20 +1,38 @@
 <template>
-  <el-input v-model="msg"></el-input><br>
-  <el-button @click="pop">测试</el-button>
-  <b-map height="100vh" :enable-scroll-wheel-zoom="true">
-    <b-zoom></b-zoom>
-    <b-scale></b-scale>
-    <b-location anchor="BMAP_ANCHOR_TOP_RIGHT"></b-location>
-  </b-map>
+  <div style="width: 1000px;height: 600px">
+    <div class="map-wrapper">
+        <BMap enableScrollWheelZoom ref="map" @initd="get"  :center="location.point || undefined">
+          <BNavigation3d />
+          <template v-if="!isLoading">
+            <BMarker :position="location.point"></BMarker>
+            <BCircle
+                strokeStyle="solid"
+                strokeColor="#0099ff"
+                :strokeOpacity="0.8"
+                fillColor="#0099ff"
+                :fillOpacity="0.5"
+                :center="location.point"
+                :radius="location.accuracy"
+            />
+          </template>
+        </BMap>
+    </div>
+  </div>
 </template>
-
-<style>
+<style scoped>
+.map-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
 </style>
 <script>
-
 import {ElMessage} from "element-plus"
-
-
+import { ref } from 'vue'
+import { useBrowserLocation } from 'vue3-baidu-map-gl'
+const map = ref()
+const { get, location, isLoading, isError, status } = useBrowserLocation(null, () => {
+  map.value.resetCenter()
+})
 export default{
 
   data(){
